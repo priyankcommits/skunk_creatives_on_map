@@ -1,0 +1,20 @@
+html, body {
+  height: 98%;
+}
+#mapid {
+  height: 100%;
+}
+
+.marker-div {
+  width: 100px !important;
+}
+
+.marker-image {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.marker-span {
+  background-color: white !important;
+  color: black !important;
+}
