@@ -1,9 +1,11 @@
 var mymap = L.map('mapid', {
   zoomDelta: 0.25,
   zoomSnap: 0
-}).setView([0,0], 2.3);
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  maxZoom: 18,
+}).setView([0,0], 2.8);
+L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+  subdomains: 'abcd',
+  maxZoom: 19,
   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
   '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
   'Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -18,9 +20,11 @@ function createMarker(key, item) {
   markers[key] = new L.Marker([item.lat, item.long], {
     icon: new L.DivIcon({
       className: 'marker-div',
-      html: '<img class="marker-image" src="images/'+ item.image + '"/>' +
-      '<br><span class="marker-span">'+ item.creative + '</span>' +
-      '<br><span class="marker-span">Impressions:'+ item.impressions + '</span>'
+      html:'<div class="card">'+
+      '<div class="card-image">' +
+      '<img class="marker-image" src="images/' + item.image + '">' +
+      '</div>' +
+      '</div>'
     })
   });
   markers[key].addTo(mymap);
@@ -47,15 +51,17 @@ function generateCurrentMarkerData(timeParam) {
 }
 
 var x = 0;
+var timeDiv = document.getElementById("time");
 function renderTransitioningMakers() {
   var intervalID = setInterval(function () {
     removeMarkers();
-    currentMarkers = [];
     generateCurrentMarkerData(x);
+    currentMarkers = [];
+    timeDiv.innerHTML = x+":00 - "+(parseInt(x)+1)+":00";
     if (++x === 24) {
       window.clearInterval(intervalID);
     }
-  }, 1000);
+  }, 2000);
 }
 
 renderTransitioningMakers();

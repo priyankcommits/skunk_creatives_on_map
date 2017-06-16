@@ -1,5 +1,6 @@
 html, body {
-  height: 98%;
+  background-color: #212022;
+  height: 96%;
 }
 #mapid {
   height: 100%;
@@ -10,11 +11,17 @@ html, body {
 }
 
 .marker-image {
-  height: 50px !important;
-  width: 50px !important;
+  width: 200px !important;
 }
 
 .marker-span {
   background-color: white !important;
   color: black !important;
+}
+
+#time {
+  color: white;
+}
+.marker-p {
+  font-size: 10px !important;
 }
